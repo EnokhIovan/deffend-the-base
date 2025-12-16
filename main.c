@@ -12,6 +12,7 @@ void stateSprt(int);
 void chooseWeapon(Player*, Weapons[], int);
 void chooseArmours(Player*, Armours[], int);
 int stateCount=0;
+bool gameStats = 0;
 
 int main(){
     Player player;
@@ -28,17 +29,15 @@ int main(){
     chooseWeapon(&player, startUpWeapons, STARTUP_WEAPONS_COUNT);
     chooseArmours(&player, startUpArmours, STARTUP_ARMOURS_COUNT);
 
-    
-    bool gameStats = 0;
     int userAtkChoice;
     printf("\nBagus! Kamu sudah siap bertempur sekarang!\n");
-    while(player.hp > 0 || player.state == ALIVE){
+    while(player.state == ALIVE && gameStats == 0){
         stateSprt(stateCount);
         printPlayer(&player);
         
         if(!player.inCombat){
             int userLocChoice;
-            printf("\nCepat! pilihlah area yang ingin kamu pertahankan sekarang!\n");
+            printf("\nCepat! Pilihlah area yang ingin kamu pertahankan sekarang!\n");
             for(int idx=0; idx<LOCATIONS_COUNT; idx++){
                 printf("%d. %-16s | %.1f / %.1f (%.0f%%) | Status: %s\n",
                     idx+1, locations[idx].name, locations[idx].hp, locations[idx].maxHP, (locations[idx].hp/locations[idx].maxHP)*100, (locations[idx].enemyCount == 0) ? "Aman" : "Tidak aman");
@@ -47,6 +46,7 @@ int main(){
             scanf("%d", &userLocChoice);
             changeLocation(&player, --userLocChoice);
         } else {
+            
             int locIdx = locationIdx(player);
             int count = 0;
             printf("\nLihat, ada musuh di sana! Tentukanlah mana yang ingin kamu serang!\n");
@@ -60,10 +60,26 @@ int main(){
             }
             printf("Nomor: ");
             scanf("%d", &userAtkChoice);
-            damageApply(&player, locations[locIdx].enemy, --userAtkChoice);
+            userAtkChoice--;
+            while(locations[locIdx].enemy[userAtkChoice].state == DEAD)
+                userAtkChoice++;
+
+            damageApply(&player, locations[locIdx].enemy, userAtkChoice);
         }
+
+        // for(int idx=0; idx<LOCATIONS_COUNT; idx++){
+        //     if(locations[idx].enemyCount != 0)
+        //         break;
+        //     if(idx+1 == LOCATIONS_COUNT)
+        //         gameStats = 1;
+        // }
         stateCount++;
     }
+
+    if(player.state == DEAD)
+        printf("\nYahhh, kamu tewas dalam peperangan :(\nTidak apa! Ayo lebih semangat lagi!\n");
+    else if(gameStats == 1)
+        printf("\nWahhh, kamu berhasil mempertahankan kota!\nTerima kasih yaa atas bantuannya, sampai jumpa!\n");
     
     return 0;
 }

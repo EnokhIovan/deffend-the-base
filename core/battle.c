@@ -20,7 +20,7 @@ void battleLog(Player *p, Rebel *r, int attackIdx, BuffBonus pB, BuffBonus rB[],
         defCalc(p->atk + pB.criticalHit, r[attackIdx].stats.def),
         pB.lifesteal
     );
-    for(int idx=0; idx<locations[locationIdx(*p)].enemyCount; idx++){
+    for(int idx=0; idx<ENEMY_MAX; idx++){
         if (r[idx].state == ALIVE){
             sprintf(stateSen[1], (p->state == DEAD && idx == idxMurder) ?
                 "%s membunuhmu dengan" : "%s menyerangmu dan",
@@ -39,6 +39,7 @@ void battleLog(Player *p, Rebel *r, int attackIdx, BuffBonus pB, BuffBonus rB[],
     printf("\n");
 }
 
+extern bool gameStats;
 void damageApply(Player *p, Rebel *r, int attackIdx){
     BuffBonus playerBonus;
     BuffBonus rebelBonus[2];
@@ -52,10 +53,28 @@ void damageApply(Player *p, Rebel *r, int attackIdx){
     r[attackIdx].stats.hp -= (playerDamage - r[attackIdx].stats.def <= 0) ? 1 : playerDamage - r[attackIdx].stats.def;
     p->hp += playerFinalLifesteal;
 
-    if(r[attackIdx].stats.hp <= 0)
+    if(r[attackIdx].stats.hp <= 0){
         r[attackIdx].state = DEAD;
+        locations[locationIdx(*p)].enemyCount -= 1;
+    }
+    if(locations[locationIdx(*p)].enemyCount == 0){
+        battleLog(p, r, attackIdx, playerBonus, rebelBonus, -1);
+
+        for(int idx=0; idx<LOCATIONS_COUNT; idx++){
+            if(locations[idx].enemyCount != 0)
+                break;
+            if(idx+1 == LOCATIONS_COUNT){
+                gameStats = 1;
+                return ;
+            }
+        }
+
+        printf("\nOh hey! Bagus! Sudah tidak ada musuh di sini.\nAyo kita pergi ke sisi yang lain!\n");
+        p->inCombat = 0;
+        return ;
+    }
     
-    for(int idx=0; idx<locations[locationIdx(*p)].enemyCount; idx++){
+    for(int idx=0; idx<ENEMY_MAX; idx++){
         if (p->state == ALIVE && r[idx].state == ALIVE){
             float rebelDamage = (((float)rand() / (float)RAND_MAX) < r[idx].stats.critC) ? r[idx].stats.atk*2 : r[idx].stats.atk;
             float rebelLifesteal = (((float)rand() / (float)RAND_MAX) < r[idx].stats.lsC) ? rebelDamage/2 : 0;
