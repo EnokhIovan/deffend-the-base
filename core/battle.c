@@ -2,7 +2,7 @@
 #include "battle.h"
 
 float defCalc(float dmg, float def){
-    return (dmg > def) ? def : def-1;
+    return (dmg > def) ? def : dmg-1;
 }
 
 void battleLog(Player *p, Rebel *r, int attackIdx, BuffBonus pB, BuffBonus rB[]){
