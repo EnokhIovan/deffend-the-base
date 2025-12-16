@@ -5,6 +5,11 @@
 #include "../entities/character.h"
 #include "../maps/location.h"
 
+typedef struct {
+    float criticalHit;
+    float lifesteal;
+} BuffBonus;
+
 void damageApply(Player*, Rebel*, int);
 void battleLog();
 

@@ -4,6 +4,7 @@
 
 typedef struct {
     char name[32];
+    float maxHP;
     float hp;
     float atk;
     float def;
@@ -16,10 +17,12 @@ typedef struct {
 } Player;
 
 typedef struct {
+    float maxHP;
     float hp;
     float atk;
     float def;
     float critC;
+    float lsC;
 } Rebel_Stats;
 
 typedef struct {

@@ -4,16 +4,16 @@
 #include "../entities/character.h"
 #define lenCalc(arr) sizeof(arr)/sizeof(arr[0])
 
-// Rebel_Stats rebel_melee = {100.0, 25.0, 20.0, 0.25};
-// Rebel_Stats rebel_range = {85.0, 35.0, 15.0, 0.40};
-// | NAME | HP | ATK | DEF | CRIT. CH.
+// Rebel_Stats rebel_melee = {100.0, 100.0, 25.0, 20.0, 0.25, 0.0};
+// Rebel_Stats rebel_range = {85.0, 85.0, 35.0, 15.0, 0.40, 0.0};
+// | NAME | MAX HP | HP | ATK | DEF | CRIT. CH. | LIFESTEAL CH.
 Rebel eastGateEnemy[] = {
-    {"Rebel 1", {100.0, 25.0, 20.0, 0.25}},
-    {"Rebel 2", {85.0, 35.0, 15.0, 0.40}}
+    {"Rebel 1", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}},
+    {"Rebel 2", {85.0, 85.0, 35.0, 15.0, 0.40, 0.0}}
 };
 Rebel westGateEnemy[] = {
-    {"Rebel 1", {100.0, 25.0, 20.0, 0.25}},
-    {"Rebel 2", {100.0, 25.0, 20.0, 0.25}}
+    {"Rebel 1", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}},
+    {"Rebel 2", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}}
 };
 
 Location locations[] = {

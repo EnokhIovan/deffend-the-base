@@ -50,7 +50,9 @@ int main(){
             int locIdx = locationIdx(player);
             printf("\nLihat, ada musuh di sana! Tentukanlah mana yang ingin kamu serang!\n");
             for(int idx=0; idx<ENEMY_MAX; idx++){
-                printf("%d. %-12s | HP: %5.1f | ATK: %4.1f\n", idx+1, locations[locIdx].enemy[idx].name, locations[locIdx].enemy[idx].stats.hp, locations[locIdx].enemy[idx].stats.atk);
+                printf("%d. %-12s | HP: %5.1f / %5.1f | ATK: %4.1f | DEF: %4.1f\n",
+                    idx+1, locations[locIdx].enemy[idx].name, locations[locIdx].enemy[idx].stats.hp, locations[locIdx].enemy[idx].stats.maxHP, locations[locIdx].enemy[idx].stats.atk, locations[locIdx].enemy[idx].stats.def
+                );
             }
             printf("Nomor: ");
             scanf("%d", &userAtkChoice);
