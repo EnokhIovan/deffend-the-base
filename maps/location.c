@@ -6,14 +6,14 @@
 
 // Rebel_Stats rebel_melee = {100.0, 100.0, 25.0, 20.0, 0.25, 0.0};
 // Rebel_Stats rebel_range = {85.0, 85.0, 35.0, 15.0, 0.40, 0.0};
-// | NAME | MAX HP | HP | ATK | DEF | CRIT. CH. | LIFESTEAL CH.
+// | NAME | MAX HP | HP | ATK | DEF | CRIT. CH. | LIFESTEAL CH. | STATE
 Rebel eastGateEnemy[] = {
-    {"Rebel 1", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}},
-    {"Rebel 2", {85.0, 85.0, 35.0, 15.0, 0.40, 0.0}}
+    {"Rebel 1", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}, ALIVE},
+    {"Rebel 2", {85.0, 85.0, 35.0, 15.0, 0.40, 0.0}, ALIVE}
 };
 Rebel westGateEnemy[] = {
-    {"Rebel 1", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}},
-    {"Rebel 2", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}}
+    {"Rebel 1", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}, ALIVE},
+    {"Rebel 2", {100.0, 100.0, 25.0, 20.0, 0.25, 0.0}, ALIVE}
 };
 
 Location locations[] = {

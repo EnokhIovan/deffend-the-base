@@ -11,6 +11,6 @@ typedef struct {
 } BuffBonus;
 
 void damageApply(Player*, Rebel*, int);
-void battleLog();
+void battleLog(Player*, Rebel*, int, BuffBonus, BuffBonus[], int);
 
 #endif

@@ -2,6 +2,12 @@
 #define CHARACTER_H
 #include <stdbool.h>
 
+typedef enum {
+    ALIVE,
+    DEAD,
+    STUNNED
+} EntityState;
+
 typedef struct {
     char name[32];
     float maxHP;
@@ -14,6 +20,7 @@ typedef struct {
     float lsC;
     char location[32];
     bool inCombat;
+    EntityState state;
 } Player;
 
 typedef struct {
@@ -28,6 +35,7 @@ typedef struct {
 typedef struct {
     char name[16];
     Rebel_Stats stats;
+    EntityState state;
 } Rebel;
 
 void initPlayer(Player *p, const char *name);

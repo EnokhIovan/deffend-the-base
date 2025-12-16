@@ -15,6 +15,7 @@ void initPlayer(Player *p, const char *name) {
     p->lsC = 0.0;
     strcpy(p->location, "Rumah");
     p->inCombat = 0;
+    p->state = ALIVE;
 }
 
 void printPlayer(Player *p){
